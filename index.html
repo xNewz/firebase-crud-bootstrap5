@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <title>บันทึกข้อมูล นักศึกษา</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./index.html">
+          <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./index.html">บันทึกข้อมูล</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="ค้นหา" aria-label="Search" id="searchBar">
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <a href="./rec.html" class="btn btn-primary">บันทึกข้อมูล</a>
+
+      <div class="table-responsive" id="no-more-tables">
+        <table class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">ลำดับที่</th>
+              <th scope="col">รหัสนักศึกษา</th>
+              <th scope="col">ชื่อ-นามสกุล</th>
+              <th scope="col">คณะ</th>
+              <th scope="col">สาขา</th>
+              <th scope="col">แก้ไข/ลบ</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal edit data -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">แก้ไข ข้อมูล</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">รหัสนักศึกษา</label>
+              <input type="text" class="form-control" id="editstuid" />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">ชื่อ-นามสกุล</label>
+              <input type="text" class="form-control" id="editname" />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">คณะ</label>
+              <!-- <input type="text" class="form-control" id="editfaculty" /> -->
+              <select class="form-select mb-3" id="editfaculty">
+                <option>วิศวกรรมศาสตร์</option>
+                <option>สถาปัตยกรรม ศิลปะและการออกแบบ</option>
+                <option>ครุศาสตร์อุตสาหกรรมและเทคโนโลยี</option>
+                <option>เทคโนโลยีการเกษตร</option>
+                <option>วิทยาศาสตร์</option>
+                <option>อุตสาหกรรมอาหาร</option>
+                <option>เทคโนโลยีสารสนเทศ</option>
+                <option>วิทยาลัยนานาชาติ</option>
+                <option>เทคโนโลยีและนวัตกรรมวัสดุ</option>
+                <option>นวัตกรรมการผลิตขั้นสูง</option>
+                <option>บริหารธุรกิจ</option>
+                <option>อุตสาหกรรมการบินนานาชาติ</option>
+                <option>ศิลปศาสตร์</option>
+                <option>แพทยศาสตร์</option>
+                <option>การจัดการนวัตกรรมและอุตสาหกรรม</option>
+                <option>วิศวกรรมสังคีต</option>
+                <option>ทันตแพทยศาสตร์</option>
+                <option>วิทยาเขตชุมพรเขตรอุดมศักดิ์</option>
+                <option>สำนักวิชาศึกษาทั่วไป</option>
+                <option>นักศึกษาแลกเปลี่ยน</option>
+              </select> 
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">สาขา</label>
+              <input type="text" class="form-control" id="editmajor" />
+            </div>
+            <input type="hidden" id="id" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+            <button type="button" class="btn btn-primary" id="updateData" onclick="updateData()">บันทึกข้อมูล</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
