@@ -3,6 +3,7 @@ import { onValue, ref } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-
 
 function handleEditModal(
   db,
+  imagePreview,
   dataKey,
   editStudentIdInput,
   editNameInput,
@@ -16,6 +17,7 @@ function handleEditModal(
     const { stuid, name, faculty, major } = snapshot.val();
 
     // Update input values
+    imagePreview.attr("src", snapshot.val().profileImageUrl);
     editStudentIdInput.val(stuid);
     editNameInput.val(name);
     editFacultySelect.val(faculty);

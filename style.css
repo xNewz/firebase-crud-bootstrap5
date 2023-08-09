@@ -1,36 +1,65 @@
-@import url('https://fonts.googleapis.com/css?family=Kanit:300,400,600');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Kanit', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Kanit:300,400,600");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Kanit", sans-serif;
 }
 
 .navbar-brand {
-    color: white;
+  color: white;
 }
 
 @media only screen and (max-width: 800px) {
-    #no-more-tables tbody, #no-more-tables tr, #no-more-tables td, #no-more-tables th {
-        display: block;
-    } 
-    #no-more-tables thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-    #no-more-tables td, #no-more-tables th {
-        position: relative;
-        padding-left: 50%;
-    }
-    #no-more-tables td:before, #no-more-tables th:before {
-        position: absolute;
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        content: attr(data-title);
-        font-weight: bold;
-    }
+  #no-more-tables tbody,
+  #no-more-tables tr,
+  #no-more-tables td,
+  #no-more-tables th {
+    display: block;
+  }
+  #no-more-tables thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  #no-more-tables td,
+  #no-more-tables th {
+    position: relative;
+    padding-left: 50%;
+  }
+  #no-more-tables td:before,
+  #no-more-tables th:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-title);
+    font-weight: bold;
+  }
+}
+
+.profile-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-image-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 16px;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.profile-image-container:hover .profile-image-text {
+  opacity: 1;
 }

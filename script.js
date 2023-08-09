@@ -103,6 +103,7 @@ $("#editModal").on("show.bs.modal", function (event) {
   // Use the edit modal handler function
   handleEditModal(
     db,
+    $("#editImagePreview"),
     dataKey,
     $("#editstuid"),
     $("#editname"),
