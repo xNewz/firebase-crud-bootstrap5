@@ -64,7 +64,7 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="container mt-3 mb-2">
       <div class="mb-3">
         <label for="validationDefault01" class="form-label">รหัสนักศึกษา</label>
         <input type="text" class="form-control" id="stuid" required />
@@ -73,9 +73,8 @@
         <label for="validationDefault02" class="form-label">ชื่อ-นามสกุล</label>
         <input type="text" class="form-control" id="name" required />
       </div>
-      <class class="mb-3">
+      <div class="mb-3">
         <label for="validationDefault03" class="form-label">คณะ</label>
-        <!-- <input type="text" class="form-control" id="faculty" placeholder="ครุศาสตร์ฯ" required/> -->
         <select class="form-select mb-3" id="faculty">
           <option>วิศวกรรมศาสตร์</option>
           <option>สถาปัตยกรรม ศิลปะและการออกแบบ</option>
@@ -98,16 +97,24 @@
           <option>สำนักวิชาศึกษาทั่วไป</option>
           <option>นักศึกษาแลกเปลี่ยน</option>
         </select>
-        <div class="mb-3">
-          <label for="validationDefault04" class="form-label">สาขา</label>
-          <input type="text" class="form-control" id="major" required />
-        </div>
-
-        <button type="submit" class="btn btn-primary" id="create-data">
-          <i class="fas fa-user-plus"></i>
-          บันทึกข้อมูล
-        </button>
-      </class>
+      </div>
+      <div class="mb-3">
+        <label for="validationDefault04" class="form-label">สาขา</label>
+        <input type="text" class="form-control" id="major" required />
+      </div>
+      <div class="mb-3">
+        <label for="profileImage" class="form-label">รูปโปรไฟล์</label>
+        <input
+          type="file"
+          class="form-control"
+          id="profileImage"
+          accept="image/*"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary" id="create-data">
+        <i class="fas fa-user-plus"></i>
+        บันทึกข้อมูล
+      </button>
     </div>
 
     <script

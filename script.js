@@ -1,5 +1,5 @@
 import { db } from "./components/firebaseSetup.js";
-import { createData } from "./components/createData.js";
+import { createData, uploadProfileImage } from "./components/createData.js";
 import { createTable } from "./components/createTable.js";
 import { handleEditModal } from "./components/editModalHandler.js";
 import { updateData } from "./components/updateData.js";
@@ -21,30 +21,74 @@ searchInput.on("keyup", function () {
 });
 
 // Create Data
-$("#create-data").click(function () {
-  // Validation check
-  if (
-    studentIdInput.val() === "" ||
-    nameInput.val() === "" ||
-    facultySelect.val() === "" ||
-    majorInput.val() === ""
-  ) {
-    // Display an error message using sweetalert
+$("#create-data").click(async function () {
+  try {
+    // Validation check
+    if (
+      studentIdInput.val() === "" ||
+      nameInput.val() === "" ||
+      facultySelect.val() === "" ||
+      majorInput.val() === ""
+    ) {
+      // Display an error message using sweetalert
+      Swal.fire({
+        icon: "error",
+        title: "กรุณากรอกข้อมูลให้ครบ",
+      });
+    } else {
+      const profileImageFile = $("#profileImage")[0].files[0];
+
+      if (profileImageFile) {
+        try {
+          const profileImageUrl = await uploadProfileImage(
+            profileImageFile,
+            studentIdInput.val()
+          );
+          if (profileImageUrl) {
+            createData(
+              studentIdInput.val(),
+              nameInput.val(),
+              facultySelect.val(),
+              majorInput.val(),
+              profileImageUrl
+            );
+            studentIdInput.val("");
+            nameInput.val("");
+            facultySelect.val("");
+            majorInput.val("");
+            $("#profileImage").val("");
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ",
+            });
+          }
+        } catch (uploadError) {
+          console.error("Error uploading profile image:", uploadError);
+          Swal.fire({
+            icon: "error",
+            title: "เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ",
+          });
+        }
+      } else {
+        createData(
+          studentIdInput.val(),
+          nameInput.val(),
+          facultySelect.val(),
+          majorInput.val()
+        );
+        studentIdInput.val("");
+        nameInput.val("");
+        facultySelect.val("");
+        majorInput.val("");
+      }
+    }
+  } catch (error) {
+    console.error("Error creating data:", error);
     Swal.fire({
       icon: "error",
-      title: "กรุณากรอกข้อมูลให้ครบ",
+      title: "เกิดข้อผิดพลาด",
     });
-  } else {
-    createData(
-      studentIdInput.val(),
-      nameInput.val(),
-      facultySelect.val(),
-      majorInput.val()
-    );
-    studentIdInput.val("");
-    nameInput.val("");
-    facultySelect.val("");
-    majorInput.val("");
   }
 });
 
