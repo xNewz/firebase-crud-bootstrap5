@@ -5,7 +5,8 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-d
 const firebaseConfig = {
   apiKey: "************************************",
   authDomain: "************************************",
-  databaseURL: "************************************",
+  databaseURL:
+  "************************************",
   projectId: "************************************",
   storageBucket: "************************************",
   messagingSenderId: "************************************",
