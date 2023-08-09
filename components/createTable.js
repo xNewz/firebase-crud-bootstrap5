@@ -44,10 +44,10 @@ function generateTableHTML(snapshot) {
         <td data-title="สาขา">${major}</td>
         <td data-title="อัพเดท/ลบ">
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal" data-key="${data.key}">
-            อัพเดท
+          <i class="fas fa-user-edit"></i> อัพเดท
           </button>
           <button type="button" class="btn btn-danger" id="delete-data">
-            ลบ
+          <i class="fas fa-user-minus"></i> ลบ
           </button>
         </td>
       </tr>
