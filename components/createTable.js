@@ -4,28 +4,11 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
 async function getStudentData(db) {
-  return new Promise((resolve, reject) => {
-    const getStudentDataRef = ref(db, "RecStudent");
-    onValue(
-      getStudentDataRef,
-      (snapshot) => {
-        resolve(snapshot);
-      },
-      (error) => {
-        reject(error);
-      }
-    );
-  });
+  // TODO: ดึงข้อมูลนักศึกษาจาก Realtime Database
 }
 
 async function createTable(db, tableBody) {
-  try {
-    const snapshot = await getStudentData(db);
-    const tableHTML = generateTableHTML(snapshot);
-    tableBody.html(tableHTML);
-  } catch (error) {
-    console.error("Error creating table:", error);
-  }
+  // TODO: ดึงข้อมูลนักศึกษาจาก Realtime Database มาแสดงในตาราง
 }
 
 function generateTableHTML(snapshot) {

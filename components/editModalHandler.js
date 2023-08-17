@@ -11,21 +11,7 @@ function handleEditModal(
   editMajorInput,
   idInput
 ) {
-  const studentRef = ref(db, "RecStudent/" + dataKey); // Use ref instead of getDatabase
-
-  onValue(studentRef, (snapshot) => {
-    const { stuid, name, faculty, major } = snapshot.val();
-
-    // Update input values
-    imagePreview.attr("src", snapshot.val().profileImageUrl);
-    editStudentIdInput.val(stuid);
-    editNameInput.val(name);
-    editFacultySelect.val(faculty);
-    editMajorInput.val(major);
-
-    // Set data key
-    idInput.val(dataKey);
-  });
+  // TODO: ดึงข้อมูลนักศึกษาจาก Realtime Database มาแสดงใน Modal
 }
 
 export { handleEditModal };
