@@ -6,10 +6,10 @@ import {
 async function deleteData(db, id) {
   try {
     await remove(ref(db, "RecStudent/" + id));
-    return true;
+    return { success: true };
   } catch (error) {
     console.error("Error deleting data:", error);
-    throw error;
+    return { success: false, message: error.message};
   }
 }
 
