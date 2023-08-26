@@ -6,10 +6,10 @@ import {
 async function updateData(db, dataKey, updatedData) {
   try {
     await update(ref(db, "RecStudent/" + dataKey), updatedData);
-    return true;
+    return { success: true };
   } catch (error) {
     console.error("Error updating data:", error);
-    throw error;
+    return { success: false, message: error.message };
   }
 }
 
