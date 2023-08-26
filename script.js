@@ -121,39 +121,42 @@ $("#edit-data").click(async function () {
     major: $("#editmajor").val(),
   };
 
-  const result = await Swal.fire({
-    title: "อัพเดทข้อมูล",
-    text: "คุณต้องการอัพเดทข้อมูลใช่หรือไม่",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "ใช่, อัพเดทข้อมูล",
-    cancelButtonText: "ไม่",
-  });
+  try {
+    const result = await Swal.fire({
+      title: "อัพเดทข้อมูล",
+      text: "คุณต้องการอัพเดทข้อมูลใช่หรือไม่?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "ใช่, อัพเดทข้อมูล",
+      cancelButtonText: "ไม่",
+    });
 
-  if (result.isConfirmed) {
-    try {
-      const updateSuccessful = await updateData(
-        db,
-        $("#id").val(),
-        updatedData
-      );
-      if (updateSuccessful) {
+    if (result.isConfirmed) {
+      const updateResult = await updateData(db, updatedData.stuid, updatedData);
+
+      if (updateResult.success) {
         await Swal.fire({
-          title: "อัพเดทข้อมูลเรียบร้อยแล้ว",
+          title: "อัพเดทข้อมูลเรียบร้อย",
           text: "คลิกปุ่ม OK เพื่อกลับสู่หน้าหลัก",
           icon: "success",
         });
         window.location.href = "index.html";
+      } else {
+        Swal.fire({
+          title: "เกิดข้อผิดพลาด",
+          text: updateResult.message || "ไม่สามารถอัพเดทได้ โปรดลองอีกครั้ง",
+          icon: "error",
+        });
       }
-    } catch (error) {
-      Swal.fire({
-        title: "เกิดข้อผิดพลาด",
-        text: "ไม่สามารถอัพเดทข้อมูลได้ โปรดลองอีกครั้ง",
-        icon: "error",
-      });
     }
+  } catch (error) {
+    Swal.fire({
+      title: "เกิดข้อผิดพลาด",
+      text: "ไม่สามารถอัพเดทได้ โปรดลองอีกครั้ง",
+      icon: "error",
+    });
   }
 });
 
